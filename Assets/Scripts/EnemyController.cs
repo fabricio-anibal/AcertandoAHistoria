@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
 
             life = Mathf.Clamp(life -= collisionDemage, 0, 500);
 
+            
+
             //Debug.Log(lifeBar.transform.localScale.x);
 
             float newXScale = 0;
