@@ -6,9 +6,10 @@ public class KunController : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    public float releaseTime = .15f;
+    public float releaseTime = 0f;
 
     private bool isPressed = false;
+
     private void OnMouseDown()
     {
         isPressed = true;
