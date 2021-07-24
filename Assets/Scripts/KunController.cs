@@ -16,10 +16,18 @@ public class KunController : MonoBehaviour
 
     private bool released = false;
 
+    LineRenderer lineRenderer;
+
     private void OnMouseDown()
     {
         isPressed = true;
         rb.isKinematic = true;
+
+        Vector3 directtionRay = transform.position - hook.transform.position;
+
+        Debug.Log(directtionRay);
+
+        lineRenderer.enabled = true;
     }
 
     private void Start()
@@ -27,6 +35,8 @@ public class KunController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         sj = GetComponent<SpringJoint2D>();
+
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 
     private void OnMouseUp()
@@ -35,6 +45,8 @@ public class KunController : MonoBehaviour
         rb.isKinematic = false;
 
         StartCoroutine(Release());
+
+        lineRenderer.enabled = false;
     }
 
     private void Update()
@@ -42,6 +54,11 @@ public class KunController : MonoBehaviour
         if(isPressed)
         {
             rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, hook.transform.position);
+            lineRenderer.startWidth = lineRenderer.endWidth = 0.5f;
+            
         }
 
         if(rb.velocity.magnitude == 0 && released)
@@ -52,7 +69,11 @@ public class KunController : MonoBehaviour
 
             transform.position = hook.transform.position;
         }
+
         
+
+        
+
     }
 
     IEnumerator Release()
@@ -61,7 +82,9 @@ public class KunController : MonoBehaviour
 
         sj.enabled = false;
 
-        rb.velocity *= 2;
+        rb.velocity *= 3;
+
+        rb.angularVelocity = 200;
 
         released = true;
     }
