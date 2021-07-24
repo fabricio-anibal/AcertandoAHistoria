@@ -506,8 +506,8 @@ GameObject:
   - component: {fileID: 1714075566}
   - component: {fileID: 1714075568}
   - component: {fileID: 1714075567}
-  - component: {fileID: 1714075569}
   - component: {fileID: 1714075570}
+  - component: {fileID: 1714075569}
   m_Layer: 0
   m_Name: TesteArma
   m_TagString: Untagged
@@ -655,11 +655,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1714075563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0ede5d2df7cd64297b63c65ebf1d54, type: 3}
+  m_Script: {fileID: 11500000, guid: fbe82864f92d4094b925733b154f107f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 2048818981}
-  releaseTime: 0.15
+  releaseTime: 0.3
 --- !u!120 &1714075570
 LineRenderer:
   m_ObjectHideFlags: 0

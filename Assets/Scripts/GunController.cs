@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KunController : MonoBehaviour
+public class GunController : MonoBehaviour
 {
     Rigidbody2D rb;
 
@@ -10,7 +10,7 @@ public class KunController : MonoBehaviour
 
     public GameObject hook;
 
-    public float releaseTime = 0f;
+    public float releaseTime;
 
     private bool isPressed = false;
 
@@ -25,7 +25,7 @@ public class KunController : MonoBehaviour
 
         Vector3 directtionRay = transform.position - hook.transform.position;
 
-        Debug.Log(directtionRay);
+        //Debug.Log(directtionRay);
 
         lineRenderer.enabled = true;
     }
@@ -78,13 +78,19 @@ public class KunController : MonoBehaviour
 
     IEnumerator Release()
     {
-        yield return new WaitForSeconds(releaseTime);
+        Vector3 vectorDirecao = hook.transform.position - transform.position;
+
+        //vectorDirecao.Normalize();
+
+        Debug.Log(vectorDirecao);
 
         sj.enabled = false;
 
-        rb.velocity *= 3;
+        rb.velocity = vectorDirecao * 4;
 
         rb.angularVelocity = 200;
+
+        yield return new WaitForSeconds(releaseTime);
 
         released = true;
     }
