@@ -10,8 +10,6 @@ public class GunController : MonoBehaviour
 
     public GameObject hook;
 
-    public float releaseTime;
-
     private bool isPressed = false;
 
     private bool released = false;
@@ -44,7 +42,7 @@ public class GunController : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
 
-        StartCoroutine(Release());
+        Release();
 
         lineRenderer.enabled = false;
     }
@@ -76,7 +74,7 @@ public class GunController : MonoBehaviour
 
     }
 
-    IEnumerator Release()
+    void Release()
     {
         Vector3 vectorDirecao = hook.transform.position - transform.position;
 
@@ -90,7 +88,7 @@ public class GunController : MonoBehaviour
 
         rb.angularVelocity = 200;
 
-        yield return new WaitForSeconds(releaseTime);
+        
 
         released = true;
     }

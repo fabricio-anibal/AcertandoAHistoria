@@ -659,7 +659,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 2048818981}
-  releaseTime: 0.3
 --- !u!120 &1714075570
 LineRenderer:
   m_ObjectHideFlags: 0
