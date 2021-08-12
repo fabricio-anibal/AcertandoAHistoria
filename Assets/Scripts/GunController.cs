@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
@@ -18,7 +19,11 @@ public class GunController : MonoBehaviour
 
     LineRenderer lineRenderer;
 
+    public Canvas ForceBar;
+
     public ForcebarController forcebarController;
+
+    public Button resetButton;
 
     private void OnMouseDown()
     {
@@ -40,7 +45,9 @@ public class GunController : MonoBehaviour
 
         lineRenderer = gameObject.GetComponent<LineRenderer>();
 
-        forcebarController.maxForce(150);
+        forcebarController.maxForce(100);
+
+        resetButton.onClick.AddListener(ResetLaunch);
 
     }
 
@@ -65,11 +72,18 @@ public class GunController : MonoBehaviour
 
             VetorDirecao();
 
+            var distancia = hook.transform.position - transform.position;
+
+            float magnetude = distancia.magnitude;
+
+            Debug.Log(magnetude);
+
             rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, hook.transform.position);
             lineRenderer.startWidth = lineRenderer.endWidth = 0.5f;
+
             
         }
 
@@ -80,12 +94,8 @@ public class GunController : MonoBehaviour
         {
             //Debug.Log(rb.velocity.magnitude);
 
-            sj.enabled = true;
-
-            transform.position = hook.transform.position;
+            ResetLaunch();
         }
-
-        
 
         
 
@@ -95,7 +105,9 @@ public class GunController : MonoBehaviour
     {
         vectorDirecao = hook.transform.position - transform.position;
 
-        forcebarController.force((int)vectorDirecao.magnitude * 4);
+        Debug.Log((int)vectorDirecao.magnitude * 4);
+
+        forcebarController.force(Mathf.Clamp( (int)vectorDirecao.magnitude * (100/18), 0, 100));
     }
 
     void Release()
@@ -104,11 +116,13 @@ public class GunController : MonoBehaviour
 
         //vectorDirecao.Normalize();
 
+        ForceBar.enabled = false;
+
         Debug.Log(vectorDirecao);
 
         sj.enabled = false;
 
-        rb.velocity = vectorDirecao * 4;
+        rb.velocity = vectorDirecao * (forcebarController.slider.value)/10;
 
         rb.angularVelocity = 200;
 
@@ -121,8 +135,13 @@ public class GunController : MonoBehaviour
     {
         //new WaitForSeconds(1);
 
-        transform.position = sj.gameObject.transform.position;
+
+        ForceBar.enabled = true;
 
         sj.enabled = true;
+
+        transform.position = hook.transform.position;
+
+        rb.velocity = Vector3.zero;
     }
 }
