@@ -1695,9 +1695,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hook: {fileID: 2048818981}
-  ForceBar: {fileID: 0}
+  ForceBar: {fileID: 1973123481}
   forcebarController: {fileID: 1892862713}
-  resetButton: {fileID: 0}
+  resetButton: {fileID: 393116585}
 --- !u!120 &1714075570
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2105,8 +2105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc949e1c962e748409344e5e606ac2c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeBar: {fileID: 0}
-  life: 0
+  lifeBar: {fileID: 866204861}
+  life: 100
 --- !u!1 &2005507802
 GameObject:
   m_ObjectHideFlags: 0
