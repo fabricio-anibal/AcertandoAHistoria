@@ -10,9 +10,13 @@ public class SceneController : MonoBehaviour
 
     public Button restartButton;
 
+    public Button exitButton;
+
     void Start()
     {
         restartButton.onClick.AddListener(RestartScene);
+
+        exitButton.onClick.AddListener(ExitScene);
     }
 
     // Update is called once per frame
@@ -24,5 +28,10 @@ public class SceneController : MonoBehaviour
     void RestartScene()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    void ExitScene()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }

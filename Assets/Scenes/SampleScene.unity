@@ -706,6 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartButton: {fileID: 1568499905}
+  exitButton: {fileID: 1734068734}
 --- !u!1 &823164560
 GameObject:
   m_ObjectHideFlags: 0
