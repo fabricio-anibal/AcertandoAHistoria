@@ -23,6 +23,8 @@ public class GunController : MonoBehaviour
 
     public ForcebarController forcebarController;
 
+    public KillerController killerController;
+
     public Button resetButton;
 
     private void OnMouseDown()
@@ -112,6 +114,8 @@ public class GunController : MonoBehaviour
 
     void Release()
     {
+        killerController.UpdateAnimation(1);
+
         vectorDirecao = hook.transform.position - transform.position;
 
         //vectorDirecao.Normalize();
@@ -135,6 +139,7 @@ public class GunController : MonoBehaviour
     {
         //new WaitForSeconds(1);
 
+        killerController.UpdateAnimation(0);
 
         ForceBar.enabled = true;
 
@@ -143,5 +148,7 @@ public class GunController : MonoBehaviour
         transform.position = hook.transform.position;
 
         rb.velocity = Vector3.zero;
+
+        rb.angularVelocity = 5;
     }
 }

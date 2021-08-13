@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
     public GameObject lifeBar;
 
     public float life;
+
+    private Animator anim;
     // Start is called before the first frame update
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,9 +34,14 @@ public class EnemyController : MonoBehaviour
 
         if(lifeBar.transform.localScale.x != 0)
         {
-            Debug.Log(lifeBar.transform.localScale.x - (lifeBar.transform.localScale.x * percentDamage));
+            ////Debug.Log(lifeBar.transform.localScale.x - (lifeBar.transform.localScale.x * percentDamage));
 
             lifeBar.transform.localScale = new Vector3(newXScale, lifeBar.transform.localScale.y, lifeBar.transform.localScale.z);
+
+            if (newXScale == 0)
+            {
+                anim.SetInteger("State", 2);
+            }
         }
 
             
@@ -47,6 +54,8 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         lifeBar.transform.position = new Vector3(transform.position.x, transform.position.y + 15, 0f);
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
