@@ -71,16 +71,28 @@ public class GunController : MonoBehaviour
 
         if(isPressed)
         {
-
             VetorDirecao();
 
-            var distancia = hook.transform.position - transform.position;
+            var distancia = hook.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             float magnetude = distancia.magnitude;
 
-            Debug.Log(magnetude);
+            //Debug.Log(magnetude);
 
-            rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (magnetude <= 20)
+            {
+                rb.simulated = true;
+
+                rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            else
+            {
+                //Debug.Log(magnetude);
+
+                rb.simulated = false;
+            }
+
+
 
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, hook.transform.position);
@@ -107,13 +119,17 @@ public class GunController : MonoBehaviour
     {
         vectorDirecao = hook.transform.position - transform.position;
 
-        Debug.Log((int)vectorDirecao.magnitude * 4);
+        Debug.Log(vectorDirecao.magnitude+3);
 
-        forcebarController.force(Mathf.Clamp( (int)vectorDirecao.magnitude * (100/18), 0, 100));
+
+
+        forcebarController.force(Mathf.Clamp( (int)(vectorDirecao.magnitude + 3) * (100/20), 0, 100));
     }
 
     void Release()
     {
+        rb.simulated = true;
+
         killerController.UpdateAnimation(1);
 
         vectorDirecao = hook.transform.position - transform.position;
@@ -122,7 +138,7 @@ public class GunController : MonoBehaviour
 
         ForceBar.enabled = false;
 
-        Debug.Log(vectorDirecao);
+        //Debug.Log(vectorDirecao);
 
         sj.enabled = false;
 
