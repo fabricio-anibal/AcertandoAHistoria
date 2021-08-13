@@ -40,6 +40,8 @@ public class EnemyController : MonoBehaviour
 
             if (newXScale == 0)
             {
+                transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+
                 anim.SetInteger("State", 2);
             }
         }
